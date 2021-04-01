@@ -20,5 +20,16 @@ module Enumerable
       arr
     end
   end
-  
+  end
+
+  def my_select
+    return self.dup unless block_given?
+    arr = []
+    my_each do |x|
+    arr.push(x) if yield(x)
+    end
+    arr
+  end
+end
+
 end  
