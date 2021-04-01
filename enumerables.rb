@@ -19,11 +19,12 @@ module Enumerable
       end
       arr
     end
-  end
+    end
   end
 
   def my_select
     return self.dup unless block_given?
+
     arr = []
     my_each do |x|
     arr.push(x) if yield(x)
@@ -31,5 +32,31 @@ module Enumerable
     arr
   end
 end
+
+def my_all?(arr)
+  return self.dup unless block_given?
+
+  my_each(arr) do |x|
+  if !yield(x)
+  return false
+  end
+  end
+  return true
+end
+end
+
+def my_any?(arr)
+  return self.dup unless block_given?
+  
+  my_each(arr) do |x|
+  if yield(x)
+  return true
+  end
+  end
+  return false
+  end
+end
+
+
 
 end  
