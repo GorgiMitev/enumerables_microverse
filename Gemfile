@@ -5,4 +5,3 @@ git_source(:github) { |enumerables_microverse| "https://github.com/Solenka1#{enu
 # gem "rails"
 gem 'bundler'
 gem 'rspec'
-
