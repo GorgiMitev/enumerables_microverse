@@ -27,40 +27,47 @@ module Enumerable
   end
 #[1, 2, 3, 4, 5].my_select { |i| puts i.even? }
 
-  def my_all?
-    i = 0
-    while i < self.length
-      if !yield(self[i])
-        return false 
-      end
-        return true 
+def my_all?
+  self.my_each { |i|
+    unless yield(i)
+      return false
     end
-  end
+    }
+    return true
+end
 #[1, 2, 3, 4, 5].all? { |i| puts i < 5 }
 
-
-
-  def my_any?
-    i = 0
-    while i < self.length
-      if !yield(self[i])
-        return false 
-      end
-        return true 
+def my_any?
+  self.my_each { |i|
+    if yield(i)
+      return true
     end
-  end
+  }
+  return false
+end
 
 #[1, 2, 3, 4, 5].any? { |i| puts i < 6 }
 
 def my_none?
-  i = 0
-  while i < self.length
-    if yield(self[i])
-      return true 
+  self.my_each { |i|
+    if yield(i)
+      return false
     end
-      return false 
-  end
+  }
+  return true
 end
 #[1, 2, 3, 4, 5].my_none? { |i| puts i < 10 }
 
-end  
+def my_count
+  count = 0
+  self.my_each { |i|
+    if yield(i)
+      count += 1
+    end
+  }
+  return count
+end
+#[1, 2, 3, 4, 5].my_count { |i| puts i**2 }
+
+
+end
