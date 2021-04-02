@@ -1,18 +1,14 @@
 
-## Bubble_sort method
+## Enumerables method
 
-In this project I was making two bubble sort methods using ruby.
-
-1. bubble_sort
-2. bubble_sort_by
+A series of short methods written as algorithms to mimick the performance of Ruby's enum methods as per Odin Project Enum Assignment 2.
 
 [x] Created the linters file required
 [x] Created the first method
 [x] Run the tests of the first method
- ``` p bubble_sort([1, 3, 2, 7, 6]) ```
 [x] Created the second method
 [x] Run the tests of the second method
- ``` p  bubble_sort_by(["halloween","hi","hello","hey"]) { |left,right| left.length - right.length } ```
+[x] Repeated the steps for the rest of the method
 [x] Created the readme file
 
 ## Built With
@@ -25,6 +21,10 @@ In this project I was making two bubble sort methods using ruby.
 **Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
 
 To get a local copy up and running follow these simple example steps.
+
+### Prerequisits
+
+- A computer with ruby installed.
 
 ### Setup
 
