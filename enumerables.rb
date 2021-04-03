@@ -3,6 +3,7 @@ module Enumerable
   def my_each
     i = 0
     return to_enum unless block_given?
+    
     while i < length
       yield self[i]
       i += 1
@@ -12,6 +13,7 @@ module Enumerable
   def my_each_with_index
     i = 0
     return to_enum unless block_given?
+
     while i < length
       yield(self[i], i)
       i += 1
@@ -30,33 +32,33 @@ module Enumerable
 
   def my_all?(para = nil)
     if block_given?
-      my_each { |i| return false unless yield i }
+      my_each { |element| return false unless yield element }
     elsif para
-      my_each { |i| return false unless match?(i, para) }
+      my_each { |element| return false unless match?(element, para) }
     else
-      my_each { |i| return false unless i }
+      my_each { |element| return false unless element }
     end
     true
   end
 
   def my_any?(para = nil)
     if block_given?
-      my_each { |i| return true if yield i }
+      my_each { |element| return true if yield element }
     elsif para
-      my_each { |i| return true if match?(i, para) }
+      my_each { |element| return true if match?(element, para) }
     else
-      my_each { |i| return true if i }
+      my_each { |element| return true if element }
     end
     false
   end
 
   def my_none?(para = nil)
     if block_given?
-      my_each { |i| return false if yield i }
+      my_each { |element| return false if yield element }
     elsif para
-      my_each { |i| return false if match?(i, para) }
+      my_each { |element| return false if match?(element, para) }
     else
-      my_each { |i| return false if i }
+      my_each { |element| return false if element }
     end
     true
   end
@@ -96,14 +98,14 @@ module Enumerable
     total
   end
 
-  def match?(i, para)
+  def match?(element, para)
     case para
     when Regexp
-      i =~ para
+      element =~ para
     when Class
-      i.is_a?(para)
+      element.is_a?(para)
     else
-      i == para
+      element == para
     end
   end
 end
