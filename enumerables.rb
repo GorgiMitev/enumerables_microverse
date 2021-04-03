@@ -3,7 +3,7 @@ module Enumerable
   def my_each
     i = 0
     return to_enum unless block_given?
-    
+
     while i < length
       yield self[i]
       i += 1
