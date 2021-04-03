@@ -1,33 +1,37 @@
 module Enumerable
   def my_each
     i = 0
+    return to_enum unless block_given?
     while i < length
       yield self[i]
       i += 1
     end
   end
 
-  # [1, 2, 3, 4, 5].my_each { |i| puts i**2 }
+  #[1, 2, 3, 4, 5].my_each { |i| puts i**2 }
 
   def my_each_with_index
     i = 0
+    return to_enum unless block_given?
     while i < length
       yield(self[i], i)
       i += 1
     end
   end
 
-  # [1, 2, 3, 4, 5].my_each_with_index { |i, index| puts i.to_s + " index:" + index.to_s }
+  #[1, 2, 3, 4, 5].my_each_with_index { |i, index| puts i.to_s + " index:" + index.to_s }
 
   def my_select
-    i = 0
-    while i < length
-      yield(self[i])
-      i += 1
+    return to_enum unless block_given?
+
+    arr = []
+    my_each do |i| 
+      arr << i if yield i 
     end
+    arr
   end
 
-  # [1, 2, 3, 4, 5].my_select { |i| puts i.even? }
+  #puts [1, 2, 3, 4, 5].my_select { |i| i.even? }
 
   def my_all?
     my_each do |i|
@@ -36,8 +40,8 @@ module Enumerable
     true
   end
 
-  # [1, 2, 3, 4, 5].all? { |i| puts i < 5 }
-
+  puts [1, 2, 3, 4, 5].all? { |i| i <= 5 }
+  
   def my_any?
     my_each do |i|
       return true if yield(i)
@@ -45,7 +49,7 @@ module Enumerable
     false
   end
 
-  # [1, 2, 3, 4, 5].any? { |i| puts i < 6 }
+  puts [1, 2, 3, 4, 5].any? { |i| i < 2 }
 
   def my_none?
     my_each do |i|
