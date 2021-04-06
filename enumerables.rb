@@ -22,7 +22,6 @@ module Enumerable
     self
   end
 
-
   def my_select
     return to_enum unless block_given?
 
@@ -74,7 +73,7 @@ module Enumerable
     elsif args[0]
       my_each { |i| count += 1 if i == args[0] }
     else
-      my_each { |i| count += 1 }
+      my_each { |_i| count += 1 }
     end
 
     count
