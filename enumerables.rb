@@ -1,24 +1,27 @@
 # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 module Enumerable
   def my_each
-    i = 0
     return to_enum unless block_given?
 
-    while i < length
-      yield self[i]
+    i = 0 # iterator
+    while i < to_a.length
+      yield to_a[i]
       i += 1
     end
+    self
   end
 
   def my_each_with_index
-    i = 0
     return to_enum unless block_given?
 
-    while i < length
-      yield(self[i], i)
+    i = 0
+    while i < to_a.length
+      yield to_a[i], i
       i += 1
     end
+    self
   end
+
 
   def my_select
     return to_enum unless block_given?
@@ -63,22 +66,26 @@ module Enumerable
     true
   end
 
-  def my_count
+  def my_count(*args)
     count = 0
+
     if block_given?
-      my_each do |i|
-        count += 1 if yield(i)
-      end
+      my_each { |i| count += 1 if yield i }
+    elsif args[0]
+      my_each { |i| count += 1 if i == args[0] }
+    else
+      my_each { |i| count += 1 }
     end
+
     count
   end
 
   def my_map(proc = nil)
     result = []
     if proc
-      my_each { |i| results << proc.call(yield(i)) }
+      my_each { |i| result << proc.call(yield(i)) }
     elsif block_given?
-      my_each { |i| new_arr << yield(i) }
+      my_each { |i| result << yield(i) }
     else
       return to_enum unless block_given?
     end
