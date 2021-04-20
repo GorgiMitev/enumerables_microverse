@@ -89,7 +89,7 @@ describe Enumerable do
     end
   end
   describe '#my_none' do
-   it 'Returns true if self is empty' do
+    it 'Returns true if self is empty' do
       expect([].my_none?).to eql(true)
     end
     it 'Returns false if self is not empty' do
@@ -110,5 +110,28 @@ describe Enumerable do
     it 'returns true if none of the elements is lesser than 3 chracters ' do
       expect(%w[mickey mouse].my_none? { |i| i.length < 3 }).to be(true)
     end
-end
+  end
+  describe '#my_count' do
+    it 'counts the number of the elements in the array ' do
+      expect([1, 2, 3].my_count).to be(3)
+    end
+    it 'counts the even numbers passed when range is given' do
+      expect((1..10).my_count(&:even?)).to be(5)
+    end
+    it 'counts the number of elements bigger than 3 when range is given' do
+      expect((1..10).my_count { |i| i > 3}).to be(7)
+    end
+    it 'counts the number of words in the given array' do
+      expect(%w[we are going on vacation].my_count{ |word| word.count(word) }).to be(5)
+    end
+    it 'counts the number of words has the "e" character ' do
+      expect(%w[vacation is short].my_count(/e/)).to be(0)
+    end
+    it 'counts the number of times the number three appears in the array ' do
+      expect([1, 2, 2, 4, 3, 3].my_count(3)).to be(2)
+    end
+    it 'counts the number of hash values that are odd number' do
+      expect({ a: 1, b: 2, c: 3, d: 4 }.my_count { |_k, v| v.odd? }).to eq(2)
+    end
+  end
 end
