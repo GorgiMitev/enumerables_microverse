@@ -134,4 +134,23 @@ describe Enumerable do
       expect({ a: 1, b: 2, c: 3, d: 4 }.my_count { |_k, v| v.odd? }).to eq(2)
     end
   end
+  describe '#my_map' do
+    it 'Returns an enumerable when no block is given' do
+      expect([1, 3, 5].my_map).to be_a(Enumerable)
+    end
+    context 'when block is given' do
+    it 'Returns a uppercase array' do
+      expect(%w[vacation].my_map{|i| i.upcase}).to eql(%w[VACATION])
+    end
+    it 'Returns a new array of the elements multiplied by 2' do
+      expect([1, 2, 3].my_map{|i| i*2}).to eql([2, 4, 6])
+    end
+    it 'returns a new array with all elements converted to integrs' do
+      expect(%w[1 2 3 4 5].my_map(&:to_i)).to eql([1, 2, 3, 4, 5])
+    end
+    it 'returns the class of each element in the given array' do
+      expect(['boy', :girl, 2.4].my_map(&:class)).to eql([String, Symbol, Float])
+    end
+  end
+  end
 end
