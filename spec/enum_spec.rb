@@ -28,4 +28,16 @@ describe Enumerable do
       end
     end
   end
+  describe '#my_select' do
+    it 'Returns an enumerable when no block is given' do
+      expect([1, 3, 5].my_select).to be_a(Enumerable)
+    end
+    context 'when block is given' do
+      it 'Returns the range of numbers passed when range is given' do
+        expect((1..5).my_select { |i| i  > 2}).to eql([3, 4, 5])
+      end
+    end
+  end
+
+
 end
