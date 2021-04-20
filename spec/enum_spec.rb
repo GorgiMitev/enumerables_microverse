@@ -88,4 +88,27 @@ describe Enumerable do
       expect({ x: 22, y: 4, z: 8 }.my_any? { |_k, v| v.odd? }).to eq(false)
     end
   end
+  describe '#my_none' do
+   it 'Returns true if self is empty' do
+      expect([].my_none?).to eql(true)
+    end
+    it 'Returns false if self is not empty' do
+      expect([1, 2, 3].my_none?).to eql(false)
+    end
+    it 'Returns true if none of the values in the array are even' do
+      expect([1, 5, 9].my_none?(&:even?)).to eql(true)
+    end
+    it 'Returns true if none of the given strings in the array is equal to 5 words' do
+      expect(%w[strawberry orange banana].my_none? { |i| i.size == 5 }).to eql(true)
+    end
+    it 'Returns false if  none of the given values in the array are bigger than 10' do
+      expect((12..30).my_none? { |i| i > 10 }).to eql(false)
+    end
+    it 'Returns true if none of the hash values is an odd number' do
+      expect({ x: 22, y: 4, z: 8 }.my_none? { |_k, v| v.odd? }).to eq(true)
+    end
+    it 'returns true if none of the elements is lesser than 3 chracters ' do
+      expect(%w[mickey mouse].my_none? { |i| i.length < 3 }).to be(true)
+    end
+end
 end
