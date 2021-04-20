@@ -36,8 +36,12 @@ describe Enumerable do
       it 'Returns the range of numbers passed when range is given' do
         expect((1..5).my_select { |i| i  > 2}).to eql([3, 4, 5])
       end
-    end
+      it 'Returns the even numbers passed when range is given' do
+        expect((1..10).my_select { |i| i % 2 == 0}).to eql([2, 4, 6, 8, 10])
+      end
+      it 'Returns the range of numbers passed when range is given' do
+        expect({ :goat => 10, :snake => 20, :dog => 15 }.my_select { |k, v| v > 10 }).to eql [[:snake, 20], [:dog, 15]]
+      end
   end
-
-
+end
 end
