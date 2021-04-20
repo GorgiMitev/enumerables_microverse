@@ -24,7 +24,7 @@ describe Enumerable do
     end
     context 'when block is given' do
       it 'Returnes the values with their idices' do
-        expect([1, 3, 5].my_each_with_index { |el, idx| puts "#{el} #{idx}" }) === [1, 3, 5]
+        expect([1, 3, 5].my_each_with_index { |el, idx| puts "#{el} #{idx}" }).to eql([1, 3, 5])
       end
     end
   end
@@ -119,10 +119,10 @@ describe Enumerable do
       expect((1..10).my_count(&:even?)).to be(5)
     end
     it 'counts the number of elements bigger than 3 when range is given' do
-      expect((1..10).my_count { |i| i > 3}).to be(7)
+      expect((1..10).my_count { |i| i > 3 }).to be(7)
     end
     it 'counts the number of words in the given array' do
-      expect(%w[we are going on vacation].my_count{ |word| word.count(word) }).to be(5)
+      expect(%w[we are going on vacation].my_count { |word| word.count(word) }).to be(5)
     end
     it 'counts the number of words has the "e" character ' do
       expect(%w[vacation is short].my_count(/e/)).to be(0)
@@ -139,18 +139,35 @@ describe Enumerable do
       expect([1, 3, 5].my_map).to be_a(Enumerable)
     end
     context 'when block is given' do
-    it 'Returns a uppercase array' do
-      expect(%w[vacation].my_map{|i| i.upcase}).to eql(%w[VACATION])
+      it 'Returns a uppercase array' do
+        expect(%w[vacation].my_map(&:upcase)).to eql(%w[VACATION])
+      end
+      it 'Returns a new array of the elements multiplied by 2' do
+        expect([1, 2, 3].my_map { |i| i * 2 }).to eql([2, 4, 6])
+      end
+      it 'returns a new array with all elements converted to integrs' do
+        expect(%w[1 2 3 4 5].my_map(&:to_i)).to eql([1, 2, 3, 4, 5])
+      end
+      it 'returns the class of each element in the given array' do
+        expect(['boy', :girl, 2.4].my_map(&:class)).to eql([String, Symbol, Float])
+      end
     end
-    it 'Returns a new array of the elements multiplied by 2' do
-      expect([1, 2, 3].my_map{|i| i*2}).to eql([2, 4, 6])
+    describe '#my_inject' do
+      it 'Returns the addition of the values in the array' do
+        expect([3, 6, 10, 13].inject(:+)).to eql(32)
+      end
+      it 'Returns the multiplication of the values in the array' do
+        expect([3, 5, 10].inject(:*)).to eql(150)
+      end
+      it 'Returns the multiplication of the values in the array' do
+        expect([3, 5, 10].inject(:-)).to eql(-12)
+      end
+      it 'Returns the multiplication of the values in the array' do
+        expect([16, 4, 4].inject(:/)).to eql(1)
+      end
+      it 'Returns the longest word in a given block' do
+        expect(%w[welcome to spain].my_inject { |a, word| a.length > word.length ? a : word }).to eql('welcome')
+      end
     end
-    it 'returns a new array with all elements converted to integrs' do
-      expect(%w[1 2 3 4 5].my_map(&:to_i)).to eql([1, 2, 3, 4, 5])
-    end
-    it 'returns the class of each element in the given array' do
-      expect(['boy', :girl, 2.4].my_map(&:class)).to eql([String, Symbol, Float])
-    end
-  end
   end
 end
