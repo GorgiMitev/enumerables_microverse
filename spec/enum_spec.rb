@@ -55,7 +55,7 @@ describe Enumerable do
     it 'Returns true if the values in the array are even' do
       expect([2, 4, 6].my_all?(&:even?)).to eql(true)
     end
-    it 'Returns true if the all of the given strings in the array are same size' do
+    it 'Returns true if all of the given strings in the array are same size' do
       expect(%w[bacon mango apple].my_all? { |i| i.size == 5 }).to eql(true)
     end
     it 'Returns true if the all of the given values in the array are bigger than 10' do
@@ -78,15 +78,14 @@ describe Enumerable do
     it 'Returns false if none of the values in the array are even' do
       expect([1, 5, 9].my_any?(&:even?)).to eql(false)
     end
-    # it 'Returns true if the all of the given strings in the array are same size' do
-    #   expect(%w[bacon mango apple].my_all? { |i| i.size == 5 }).to eql(true)
-    # end
-    # it 'Returns true if the all of the given values in the array are bigger than 10' do
-    #   expect((11..35).my_all? { |i| i > 10 }).to eql(true)
-    # end
-    # it 'Returs false if none of the hash values is an odd number' do
-    #   expect({ x: 22, y: 4, z: 3 }.my_all? { |_k, v| v.odd? }).to eq(false)
-    # end
+    it 'Returns true if any of the given strings in the array is equal to 5 words' do
+      expect(%w[strawberry orange apple].my_any? { |i| i.size == 5 }).to eql(true)
+    end
+    it 'Returns true if the any of the given values in the array are bigger than 10' do
+      expect((2..12).my_any? { |i| i > 10 }).to eql(true)
+    end
+    it 'Returs false if none of the hash values is an odd number' do
+      expect({ x: 22, y: 4, z: 8 }.my_any? { |_k, v| v.odd? }).to eq(false)
+    end
   end
-  
 end
