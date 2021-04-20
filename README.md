@@ -10,6 +10,9 @@ A series of short methods written as algorithms to mimick the performance of Rub
 [x] Run the tests of the second method
 [x] Repeated the steps for the rest of the method
 [x] Created the readme file
+[x] Created the rspec files
+[x] Created the tests for the methods
+[x] Run the tests for the methods
 
 ## Built With
 
@@ -18,10 +21,10 @@ A series of short methods written as algorithms to mimick the performance of Rub
 ## Getting Started
 
 **This is an example of how you may give instructions on setting up your project locally.**
-- **Clone the repo by running `git clone` https://github.com/Henryhaulka/Tic-tac-toe Or download the zip folder**
-- **Run `cd` tic_tac_toe in the terminal**
+- **Clone the repo by running `git clone` git@github.com:Solenka1/enumerables_microverse.git Or download the zip folder**
+- **Run `cd` enumerables_microverse in the terminal**
 - **Make sure you have ruby installed locally run `ruby -v`**
-- **To start the game run `bin/main.rb` in the terminal**
+- **To run the test of the methods run `rspec` in the terminal**
 
 To get a local copy up and running follow these simple example steps.
 
